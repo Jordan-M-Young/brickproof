@@ -1,0 +1,24 @@
+{
+    "environments": [
+      {
+        "environment_key": "default_python",
+        "spec": {
+          "client": "1",
+          "dependencies": [
+            "requests"
+          ]
+        }
+      }
+    ],
+    "format": "SINGLE_TASK",
+    "max_concurrent_runs": 1,
+    "name": "<MY_JOB_NAME>",
+    "tasks": [
+      {
+        "notebook_task": {
+          "notebook_path": "<MY_NOTEBOOK_PATH>"
+        },
+        "task_key": "<TASK_KEY_NAME>"
+      }
+    ]
+  }
