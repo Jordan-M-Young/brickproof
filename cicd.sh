@@ -1,13 +1,15 @@
 #!/bin/sh
 
+WORKSPACE=$1
+
 # chek if cicd-testing director exists
-if databricks workspace list /Workspace/Users/jordan.m.young0@gmail.com | grep /cicd-testing; then
+if databricks workspace list $WORKSPACE | grep /cicd-testing; then
     #if so, do nothing
     echo "/cicd-testing directory found!"
 else
     #if not, create the directory
     echo "/cicd-testing directory not found... creating directory now...."
-    databricks workspace mkdirs /Workspace/Users/jordan.m.young0@gmail.com/cicd-testing
+    databricks workspace mkdirs $WORKSPACE/cicd-testing
 fi
 
 # Load json payload from file

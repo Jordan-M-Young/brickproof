@@ -1,2 +1,7 @@
-git_folder.json
-job_def.json
+#Personal test assets
+*git_folder.json
+*job_def.json
+
+#Virtual Environments
+.venv
+venv
