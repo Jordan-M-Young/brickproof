@@ -1,0 +1,5 @@
+{
+  "provider": "gitHub",
+  "url": "<MY_GIT_URL>",
+  "path":"<MY_WORKSPACE_PATH>/<MY_REPO_NAME>.git"
+}
