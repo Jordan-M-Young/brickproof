@@ -5,3 +5,7 @@
 #Virtual Environments
 .venv
 venv
+
+
+#
+*.pyc
