@@ -2,10 +2,16 @@
 *git_folder.json
 *job_def.json
 
+#Config
+*.bprc
+
 #Virtual Environments
 .venv
 venv
 
-
 #
 *.pyc
+
+
+#Ruff
+.ruff_cache/
