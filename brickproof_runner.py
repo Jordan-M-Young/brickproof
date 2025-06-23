@@ -31,7 +31,3 @@ assert retcode == 0, 'The pytest invocation failed. See the log above for detail
 # COMMAND ----------
 #Exits notebook run with a value we can use for determining success or failure.
 dbutils.notebook.exit(retcode)
-
-# COMMAND ----------
-
-# !PYTHONDONTWRITEBYTECODE=1 python -m pytest -p no:cacheprovider
