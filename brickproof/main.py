@@ -1,6 +1,6 @@
-import requests
 import sys
-import brickproof.cli as cli
+import cli as cli
+
 
 def main(args: list):
     print(args)
@@ -9,37 +9,36 @@ def main(args: list):
         # list possible commands here....
         print("Welcome to Brickproof")
         print("Commands to run:")
-        print("\t- init: initializes brickproof project by writing new brickproof toml file")
+        print(
+            "\t- init: initializes brickproof project by writing new brickproof toml file"
+        )
         print("\t- configure: configures databricks environment interactively.")
         print("\t- run: runs brickproof testing job")
         print("\t- version: prints current brickproof version")
 
         return 0
-    
-    #version commmand
+
+    # version commmand
     if args[1] == "version" or args[1] == "Version":
         cli.version()
         return 0
 
-    #init command
+    # init command
     if args[1] == "init" or args[1] == "Init":
         cli.init("./brickproof.toml")
-    
 
-    #TODO run command
-    if args[1] == 'run' or args[1] == "Run":
+    # TODO run command
+    if args[1] == "run" or args[1] == "Run":
         profile = "default"
         if len(args) == 3:
             if args[2] == "--p" or args[2] == "--profile":
                 profile = str(args[3])
 
-        cli.run(profile=profile,file_path="./.bprc")
+        cli.run(profile=profile, file_path="./.bprc")
 
-    #configure command
+    # configure command
     if args[1] == "configure" or args[1] == "Configure":
         cli.configure()
-
-
 
     return 0
 

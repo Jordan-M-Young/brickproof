@@ -29,5 +29,9 @@ retcode = pytest.main(["-p", "no:cacheprovider"])
 assert retcode == 0, 'The pytest invocation failed. See the log above for details.'
 
 # COMMAND ----------
+#Exits notebook run with a value we can use for determining success or failure.
+dbutils.notebook.exit(retcode)
+
+# COMMAND ----------
 
 # !PYTHONDONTWRITEBYTECODE=1 python -m pytest -p no:cacheprovider
