@@ -1,5 +1,5 @@
 import sys
-import cli as cli
+import brickproof.cli as cli
 
 
 def main(args: list):

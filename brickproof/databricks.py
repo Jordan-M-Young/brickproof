@@ -1,5 +1,5 @@
 import requests
-import constants as c
+import brickproof.constants as c
 import json
 
 

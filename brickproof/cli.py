@@ -1,18 +1,18 @@
 import getpass
-from constants import (
+from brickproof.constants import (
     WORKSPACE_PROMPT,
     TOKEN_PROMPT,
     PROFILE_PROMPT,
     TESTING_DIRECTORY,
 )
-from utils import (
+from brickproof.utils import (
     write_profile,
     get_profile,
     write_toml,
     read_toml,
     get_runner_bytes,
 )
-from databricks import DatabricksHandler
+from brickproof.databricks import DatabricksHandler
 import os
 
 

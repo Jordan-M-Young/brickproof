@@ -1,4 +1,4 @@
-from constants import WORKSPACE_PREFIX, TOKEN_PREFIX, TOML_TEMPLATE
+from brickproof.constants import WORKSPACE_PREFIX, TOKEN_PREFIX, TOML_TEMPLATE
 import tomlkit
 import base64
 
