@@ -1,4 +1,9 @@
-from brickproof.constants import WORKSPACE_PREFIX, TOKEN_PREFIX, TOML_TEMPLATE
+from brickproof.constants import (
+    WORKSPACE_PREFIX,
+    TOKEN_PREFIX,
+    TOML_TEMPLATE,
+    RUNNER_DEF,
+)
 import tomlkit
 import base64
 
@@ -34,10 +39,15 @@ def get_profile(file_path: str, profile: str) -> dict:
     return {}
 
 
-def get_runner_bytes() -> str:
-    with open("./brickproof_runner.py", "rb") as runner_bytes:
-        binary_file_data = runner_bytes.read()
-        base64_encoded_data = base64.b64encode(binary_file_data)
-        base64_output = base64_encoded_data.decode("utf-8")
+def get_runner_bytes(runner: str) -> str:
+    if runner == "default":
+        runner_bytes = RUNNER_DEF.encode()
 
-        return base64_output
+    else:
+        with open("./brickproof_runner.py", "rb") as runner_file:
+            runner_bytes = runner_file.read()
+
+    base64_encoded_data = base64.b64encode(runner_bytes)
+    base64_output = base64_encoded_data.decode("utf-8")
+
+    return base64_output

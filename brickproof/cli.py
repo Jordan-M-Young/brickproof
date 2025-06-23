@@ -14,6 +14,7 @@ from brickproof.utils import (
 )
 from brickproof.databricks import DatabricksHandler
 import os
+import time
 
 
 def version():
@@ -146,11 +147,49 @@ def run(profile: str, file_path: str):
         ],
     }
     r = handler.create_job(job_payload=job_payload)
-    print("job", r.text)
+    job = r.json()
+    job_id = job["job_id"]
     # trigger job
 
-    # monitor job
+    job_payload = {"job_id": job_id}
+    r = handler.trigger_job(job_payload=job_payload)
+    job_run = r.json()
+    run_id = job_run["run_id"]
+    print(job_run)
+    start = time.time()
+    success = False
+    while True:
+        # monitor job
+        query_params = {
+            "run_id": run_id,
+        }
+        r = handler.check_job(query_params=query_params)
+        status = r.json()
+        state = status["state"]
+        print("CHECK", state)
+
+        time.sleep(1)
+        if time.time() - start > 100:
+            break
+
+        result_state = state.get("result_state")
+        if not result_state:
+            continue
+
+        if result_state == "SUCCESS":
+            result = True
+        break
+
+    print("SUCCESS", result)
 
     # delete job
+    delete_payload = {"job_id": job_id}
+
+    r = handler.remove_job(delete_payload=delete_payload)
+    print(r.text)
 
     # delete repo
+    r = handler.remove_git_folder(repo_id=repo_id)
+    print("REMOVE", r.text)
+
+    return success
