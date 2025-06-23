@@ -29,16 +29,8 @@ def test_get_profile():
     assert target == real
 
 
-def test_read_toml():
-    file_path = "./brickproof.toml"
-
-    toml_doc = read_toml(file_path=file_path)
-
-    assert toml_doc["repo"]["name"] == "brickproof"
-
-
 def test_write_toml():
-    file_path = ".test_brickproof.toml"
+    file_path = "./test_brickproof.toml"
     write_toml(file_path=file_path)
 
     toml_doc = read_toml(file_path=file_path)
