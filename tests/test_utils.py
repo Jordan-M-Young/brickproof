@@ -3,7 +3,7 @@ import os
 
 
 def test_write_bprc():
-    file_path = "./testing_assets/.bprc"
+    file_path = "./.test_bprc"
     profile = "default"
     token = "DUMMY"
     workspace = "https://XXX-XXX-XXX.cloud.databricks.com"
@@ -15,7 +15,7 @@ def test_write_bprc():
 
 
 def test_get_profile():
-    file_path = "./testing_assets/.bprc"
+    file_path = "./.test_bprc"
     profile = "default"
 
     target = {
@@ -34,11 +34,11 @@ def test_read_toml():
 
     toml_doc = read_toml(file_path=file_path)
 
-    assert toml_doc["repo"]["name"] == "test"
+    assert toml_doc["repo"]["name"] == "brickproof"
 
 
 def test_write_toml():
-    file_path = "./testing_assets/brickproof.toml"
+    file_path = ".test_brickproof.toml"
     write_toml(file_path=file_path)
 
     toml_doc = read_toml(file_path=file_path)
@@ -47,11 +47,11 @@ def test_write_toml():
 
 
 def test_cleanup():
-    file_path = "./testing_assets/brickproof.toml"
+    file_path = "./.test_brickproof.toml"
     if os.path.isfile(file_path):
         os.remove(file_path)
 
-    file_path = "./testing_assets/.bprc"
+    file_path = "./.test_bprc"
     if os.path.isfile(file_path):
         os.remove(file_path)
 
