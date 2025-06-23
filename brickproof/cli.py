@@ -115,6 +115,7 @@ def run(profile: str, file_path: str):
     runner_upload_path = f"{repo_path}/brickproof_runner.py"
 
     if not runner_exists:
+        
         content = get_runner_bytes()
         upload_paylod = {
             "content": content,
