@@ -1,13 +1,13 @@
 [repo]
 name = "brickproof"
-workspace_path = ""
+workspace_path = "/Workspace/Users/jordan.m.young0@gmail.com"
 git_provider = "gitHub"
-git_repo = ""
-branch = ""
+git_repo = "https://github.com/Jordan-M-Young/brickproof.git"
+branch = "main"
 
 
 [job]
 notebook_path = ""
-job_name = ""
-task_key = ""
+job_name = "Brickproof-Test"
+task_key = "Unittests"
 dependencies = ["requests","tomlkit"]
