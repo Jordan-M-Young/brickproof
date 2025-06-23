@@ -4,6 +4,7 @@
 
 #Config
 *.bprc
+brickproof.toml
 
 #Virtual Environments
 .venv
