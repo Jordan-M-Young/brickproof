@@ -56,7 +56,9 @@ class DatabricksHandler:
 
     def trigger_job(self, job_payload: dict) -> requests.Response:
         url = f"{self.workspace_url}/{c.TRIGGER_JOB_ENDPOINT}"
-        response = requests.post(url=url, data=job_payload, headers=self.headers)
+        response = requests.post(
+            url=url, data=json.dumps(job_payload), headers=self.headers
+        )
         return response
 
     def check_job(self, query_params: dict) -> requests.Response:
@@ -76,7 +78,9 @@ class DatabricksHandler:
 
     def remove_job(self, delete_payload: dict) -> requests.Response:
         url = f"{self.workspace_url}/{c.REMOVE_JOB_ENDPOINT}"
-        response = requests.post(url=url, data=delete_payload, headers=self.headers)
+        response = requests.post(
+            url=url, data=json.dumps(delete_payload), headers=self.headers
+        )
         return response
 
     def upload_file(self, upload_payload: dict) -> requests.Response:
