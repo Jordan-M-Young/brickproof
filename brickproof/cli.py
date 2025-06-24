@@ -12,13 +12,16 @@ from brickproof.utils import (
     read_toml,
     get_runner_bytes,
 )
+
+from brickproof.version import VERSION
+
 from brickproof.databricks import DatabricksHandler
 import os
 import time
 
 
 def version():
-    print("brickproof-v0.0.0")
+    print(f"brickproof-{VERSION}")
 
 
 def configure():
