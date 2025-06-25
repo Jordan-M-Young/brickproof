@@ -81,13 +81,3 @@ assert retcode == 0, 'The pytest invocation failed. See the log above for detail
 # COMMAND ----------
 #Exits notebook run with a value we can use for determining success or failure.
 dbutils.notebook.exit(retcode)"""
-
-
-
-HELP = """Welcome to Brickproof"
-        Commands to run
-        
-        \t- init: initializes brickproof project by writing new brickproof toml file
-        \t- configure: configures databricks environment interactively.
-        \t- run: runs brickproof testing job
-        \t- version: prints current brickproof version"""

@@ -7,6 +7,8 @@ from brickproof.constants import (
 import tomlkit
 import base64
 
+from typing import Any
+
 
 def write_toml(file_path: str):
     with open(file_path, "w") as toml_file:
@@ -51,3 +53,8 @@ def get_runner_bytes(runner: str) -> str:
     base64_output = base64_encoded_data.decode("utf-8")
 
     return base64_output
+
+
+def print_if_verbose(object: Any, verbose: bool, prefix: str) -> None:
+    if verbose:
+        print(prefix, object)

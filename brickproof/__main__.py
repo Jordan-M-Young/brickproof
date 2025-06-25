@@ -1,15 +1,13 @@
 import sys
-import sys
 import os
 import argparse
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import brickproof.cli as cli
-from brickproof.constants import HELP
+
 
 def main():
-    
     parser = argparse.ArgumentParser(
         description="Brickproof CLI – Test Databricks Notebooks with Confidence"
     )
@@ -24,6 +22,9 @@ def main():
     # --- run command ---
     run_parser = subparsers.add_parser("run", help="Runs brickproof testing job")
     run_parser.add_argument("--profile", "-p", default="default", help="Profile name")
+    run_parser.add_argument(
+        "--verbose", action="store_true", help="Enable verbose logging"
+    )
 
     # --- version command ---
     subparsers.add_parser("version", help="Prints the current brickproof version")
@@ -52,9 +53,7 @@ def main():
         parser.print_help()
 
     return 0
-     
 
 
 if __name__ == "__main__":
-
     main()
