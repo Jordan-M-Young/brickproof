@@ -6,7 +6,6 @@ git_repo = "https://github.com/Jordan-M-Young/brickproof.git"
 branch = "main"
 
 [job]
-notebook_path = ""
 job_name = "Brickproof-Test"
 task_key = "Unittests"
 dependencies = ["requests","tomlkit"]

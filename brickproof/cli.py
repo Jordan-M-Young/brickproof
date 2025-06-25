@@ -48,6 +48,8 @@ def run(profile: str, file_path: str):
     project_config = read_toml("./brickproof.toml")
     workspace_path = project_config["repo"]["workspace_path"]
     repo_name = project_config["repo"]["name"]
+    runner = project_config['job']['runner']
+
 
     # initialize databricks client
     handler = DatabricksHandler(
@@ -116,7 +118,7 @@ def run(profile: str, file_path: str):
 
     if not runner_exists:
         
-        content = get_runner_bytes()
+        content = get_runner_bytes(runner)
         upload_paylod = {
             "content": content,
             "format": "SOURCE",
