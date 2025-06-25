@@ -52,8 +52,8 @@ def main():
     else:
         parser.print_help()
 
-    return 0
 
 
 if __name__ == "__main__":
     main()
+

@@ -15,8 +15,13 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    install_requires=["toml"],  # add any additional packages that
+    install_requires=["tomlkit","requests"],  # add any additional packages that
     # needs to be installed along with your package. Eg: 'caer'
     keywords=["python3", "databricks", "unit test", "test", "cidd"],
     classifiers=["Programming Language :: Python :: 3", "Framework :: Pytest"],
+    entry_points={
+        "console_scripts": [
+            "brickproof = brickproof.__main__:main"
+        ]
+    },
 )
