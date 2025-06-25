@@ -16,6 +16,7 @@ def load_config() -> Config:
     config = validate_toml(toml_doc)
     return config
 
+
 def validate_toml(toml_data: tomlkit.TOMLDocument) -> Config:
     validated_config = Config(**toml_data)
     return validated_config

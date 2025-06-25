@@ -9,20 +9,23 @@ from brickproof.utils import (
     write_profile,
     get_profile,
     write_toml,
-    read_toml,
     get_runner_bytes,
-    load_config
+    load_config,
 )
+
+from brickproof.version import VERSION
+
 from brickproof.databricks import DatabricksHandler
 import os
 import time
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
 def version():
-    print("brickproof-v0.0.0")
+    print(f"brickproof-{VERSION}")
 
 
 def configure():
@@ -48,7 +51,6 @@ def init(toml_path: str):
 
 def run(profile: str, file_path: str, verbose: bool):
     # config loading
-
 
     db_config = get_profile(file_path=file_path, profile=profile)
     project_config = load_config()

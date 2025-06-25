@@ -1,4 +1,10 @@
-from brickproof.utils import write_profile, get_profile, read_toml, write_toml, validate_toml
+from brickproof.utils import (
+    write_profile,
+    get_profile,
+    read_toml,
+    write_toml,
+    validate_toml,
+)
 import os
 
 
@@ -54,6 +60,3 @@ def test_cleanup():
         os.remove(file_path)
 
     assert True
-    
-
-
