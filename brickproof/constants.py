@@ -34,13 +34,12 @@ WORKSPACE_PREFIX = "workspace="
 TOML_TEMPLATE = """[repo]
 name = "test"
 workspace_path = ""
-git_provider = ""
+git_provider = "gitHub"
 git_repo = ""
 branch = ""
 
 
 [job]
-notebook_path = ""
 job_name = ""
 task_key = ""
 dependencies = []
