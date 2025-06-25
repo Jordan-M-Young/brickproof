@@ -45,12 +45,13 @@ def init(toml_path: str):
         print("Project Already Initialized")
 
 
-def run(profile: str, file_path: str):
+def run(profile: str, file_path: str, verbose: bool):
     # config loading
     db_config = get_profile(file_path=file_path, profile=profile)
     project_config = read_toml("./brickproof.toml")
     workspace_path = project_config["repo"]["workspace_path"]
     repo_name = project_config["repo"]["name"]
+    runner = project_config["job"]["runner"]
 
     # initialize databricks client
     handler = DatabricksHandler(
@@ -118,8 +119,7 @@ def run(profile: str, file_path: str):
     runner_upload_path = f"{repo_path}/brickproof_runner.py"
 
     if not runner_exists:
-        
-        content = get_runner_bytes()
+        content = get_runner_bytes(runner)
         upload_paylod = {
             "content": content,
             "format": "SOURCE",

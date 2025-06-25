@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from brickproof.version import VERSION
 
 DESCRIPTION = "brickproof"
-LONG_DESCRIPTION ="a library for remote testing of databricks code"
+LONG_DESCRIPTION = "a library for remote testing of databricks code"
 
 
 # Setting up

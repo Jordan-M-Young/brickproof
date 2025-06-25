@@ -1,56 +1,59 @@
 import sys
-import sys
 import os
+import argparse
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import brickproof.cli as cli
 
 
 def main():
-    args = sys.argv
+    parser = argparse.ArgumentParser(
+        description="Brickproof CLI – Test Databricks Notebooks with Confidence"
+    )
+    subparsers = parser.add_subparsers(dest="command", required=False)
 
-    if len(args) == 1:
-        # list possible commands here....
-        print("Welcome to Brickproof")
-        print("Commands to run:")
-        print(
-            "\t- init: initializes brickproof project by writing new brickproof toml file"
-        )
-        print("\t- configure: configures databricks environment interactively.")
-        print("\t- run: runs brickproof testing job")
-        print("\t- version: prints current brickproof version")
+    # --- init command ---
+    subparsers.add_parser("init", help="Initializes a new brickproof.toml config")
 
+    # --- configure command ---
+    subparsers.add_parser("configure", help="Configures your Databricks environment")
+
+    # --- run command ---
+    run_parser = subparsers.add_parser("run", help="Runs brickproof testing job")
+    run_parser.add_argument("--profile", "-p", default="default", help="Profile name")
+    run_parser.add_argument(
+        "--verbose", action="store_true", help="Enable verbose logging"
+    )
+
+    # --- version command ---
+    subparsers.add_parser("version", help="Prints the current brickproof version")
+
+    # If no args: print help and exit
+    if len(sys.argv) == 1:
+        parser.print_help()
         return 0
 
-    # version commmand
-    if args[1] == "version" or args[1] == "Version":
+    args = parser.parse_args()
+
+    # --- Dispatch based on subcommand ---
+    if args.command == "version":
         cli.version()
-        return 0
 
-    # init command
-    if args[1] == "init" or args[1] == "Init":
+    elif args.command == "init":
         cli.init("./brickproof.toml")
-        return 0
 
-    # TODO run command
-    if args[1] == "run" or args[1] == "Run":
-        profile = "default"
-        if len(args) == 3:
-            if args[2] == "--p" or args[2] == "--profile":
-                profile = str(args[3])
-
-        cli.run(profile=profile, file_path="./.bprc")
-        return 0
-
-    # configure command
-    if args[1] == "configure" or args[1] == "Configure":
+    elif args.command == "configure":
         cli.configure()
-        return 0
 
-    return 0
+    elif args.command == "run":
+        cli.run(profile=args.profile, file_path="./.bprc")
+
+    else:
+        parser.print_help()
+
 
 
 if __name__ == "__main__":
-
     main()
+
