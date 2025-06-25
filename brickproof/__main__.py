@@ -7,8 +7,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import brickproof.cli as cli
 
 
-def main(args: list):
-    print(args)
+def main():
+    args = sys.argv
 
     if len(args) == 1:
         # list possible commands here....
@@ -52,6 +52,5 @@ def main(args: list):
 
 
 if __name__ == "__main__":
-    args = sys.argv
 
-    main(args)
+    main()
