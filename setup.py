@@ -19,4 +19,9 @@ setup(
     # needs to be installed along with your package. Eg: 'caer'
     keywords=["python3", "databricks", "unit test", "test", "cidd"],
     classifiers=["Programming Language :: Python :: 3", "Framework :: Pytest"],
+    entry_points={
+        "console_scripts": [
+            "brickproof = brickproof.__main__:main"
+        ]
+    },
 )
