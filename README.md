@@ -16,7 +16,7 @@ pip install brickproof
 To initialize a brickproof project, run:
 
 ```sh
-python3 brickproof init
+brickproof init
 ```
 
 This will create a new `brickproof.toml` file, which you will edit for your own usecase. Running the `init` command multiple times will not overwrite your `brickproof.toml` file.
@@ -28,22 +28,25 @@ To configure connection credentials to your Databricks workspace, run:
 
 ```sh
 
-python3 brickproof configure
+brickproof configure
 
 ```
+
+This command will prompt you to enter your databricks workspace url, personal access token, and profile name. These
+will be written out to a `.bprc` file in your local directory. 
 
 ## Run Brickproof
 
 To run a brickproof testing event, run:
 
 ```sh
-python3 brickproof run
+brickproof run
 ```
 
 To run with a specific configured profile, run:
 
 ```sh
-python3 brickproof run --p <MY_PROFILE>
+brickproof run --p <MY_PROFILE>
 ```
 
 ## Version
@@ -51,12 +54,11 @@ python3 brickproof run --p <MY_PROFILE>
 To get the version of your brickproof instance, run:
 
 ```sh
-python3 brickproof version
+brickproof version
 
 ```
 
-This command will prompt you to enter your databricks workspace url, personal access token, and profile name. These
-will be written out to a `.bprc` file in your local directory. 
+
 
 
 ## Contributing
@@ -71,4 +73,3 @@ To setup, run the following:
 ```sh
 ./utility_scripts/dev_setup.sh
 ```
-
