@@ -9,8 +9,8 @@ from brickproof.utils import (
     write_profile,
     get_profile,
     write_toml,
-    read_toml,
     get_runner_bytes,
+    load_config,
 )
 
 from brickproof.version import VERSION
@@ -18,6 +18,10 @@ from brickproof.version import VERSION
 from brickproof.databricks import DatabricksHandler
 import os
 import time
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def version():
@@ -47,11 +51,16 @@ def init(toml_path: str):
 
 def run(profile: str, file_path: str, verbose: bool):
     # config loading
+
     db_config = get_profile(file_path=file_path, profile=profile)
-    project_config = read_toml("./brickproof.toml")
-    workspace_path = project_config["repo"]["workspace_path"]
-    repo_name = project_config["repo"]["name"]
-    runner = project_config["job"]["runner"]
+    project_config = load_config()
+    workspace_path = project_config.repo.workspace_path
+    repo_name = project_config.repo.name
+    runner = project_config.job.runner
+
+    # if verbose flag passed, switch logging level to info
+    if verbose:
+        logger.setLevel(logging.INFO)
 
     # initialize databricks client
     handler = DatabricksHandler(
@@ -68,6 +77,7 @@ def run(profile: str, file_path: str, verbose: bool):
         object_name = file["path"].replace(workspace_path, "")
         if file["object_type"] == "DIRECTORY" and object_name == ".brickproof-cicd":
             brickproof_testing_dir_exists = True
+
             break
 
     # create brickproof testing directory if it doesnt exist
@@ -97,10 +107,10 @@ def run(profile: str, file_path: str, verbose: bool):
     # if not, create git repo using config from brickproof.toml and get id.
     if not git_repo_exists:
         git_payload = {
-            "branch": project_config["repo"]["branch"],
+            "branch": project_config.repo.branch,
             "path": repo_path,
-            "provider": project_config["repo"]["git_provider"],
-            "url": project_config["repo"]["git_repo"],
+            "provider": project_config.repo.git_provider,
+            "url": project_config.repo.git_repo,
         }
         r = handler.create_git_folder(git_payload=git_payload)
         git_data = r.json()
@@ -136,7 +146,7 @@ def run(profile: str, file_path: str, verbose: bool):
                 "environment_key": "default_python",
                 "spec": {
                     "client": "1",
-                    "dependencies": project_config["job"]["dependencies"],
+                    "dependencies": project_config.job.dependencies,
                 },
             }
         ],
@@ -159,7 +169,7 @@ def run(profile: str, file_path: str, verbose: bool):
     r = handler.trigger_job(job_payload=job_payload)
     job_run = r.json()
     run_id = job_run["run_id"]
-    print(job_run)
+    logger.info(job_run)
     start = time.time()
     success = False
     while True:

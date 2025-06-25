@@ -4,10 +4,22 @@ from brickproof.constants import (
     TOML_TEMPLATE,
     RUNNER_DEF,
 )
+
+from brickproof.config import Config
+
 import tomlkit
 import base64
 
-from typing import Any
+
+def load_config() -> Config:
+    toml_doc = read_toml("./brickproof.toml")
+    config = validate_toml(toml_doc)
+    return config
+
+
+def validate_toml(toml_data: tomlkit.TOMLDocument) -> Config:
+    validated_config = Config(**toml_data)
+    return validated_config
 
 
 def write_toml(file_path: str):
@@ -53,8 +65,3 @@ def get_runner_bytes(runner: str) -> str:
     base64_output = base64_encoded_data.decode("utf-8")
 
     return base64_output
-
-
-def print_if_verbose(object: Any, verbose: bool, prefix: str) -> None:
-    if verbose:
-        print(prefix, object)

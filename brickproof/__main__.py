@@ -1,13 +1,17 @@
 import sys
 import os
 import argparse
+import logging
 
+logger = logging.getLogger(__name__)
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import brickproof.cli as cli
 
 
 def main():
+    logging.basicConfig(filename="myapp.log", level=logging.INFO)
+
     parser = argparse.ArgumentParser(
         description="Brickproof CLI – Test Databricks Notebooks with Confidence"
     )
@@ -47,13 +51,11 @@ def main():
         cli.configure()
 
     elif args.command == "run":
-        cli.run(profile=args.profile, file_path="./.bprc")
+        cli.run(profile=args.profile, file_path="./.bprc", verbose=args.verbose)
 
     else:
         parser.print_help()
 
 
-
 if __name__ == "__main__":
     main()
-

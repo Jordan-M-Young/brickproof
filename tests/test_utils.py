@@ -1,4 +1,10 @@
-from brickproof.utils import write_profile, get_profile, read_toml, write_toml
+from brickproof.utils import (
+    write_profile,
+    get_profile,
+    read_toml,
+    write_toml,
+    validate_toml,
+)
 import os
 
 
@@ -38,8 +44,14 @@ def test_write_toml():
     assert toml_doc["repo"]["name"] == "test"
 
 
+def test_validate_toml():
+    toml_doc = read_toml("./test_brickproof.toml")
+    config = validate_toml(toml_doc)
+    assert config.job.runner == "default"
+
+
 def test_cleanup():
-    file_path = "./.test_brickproof.toml"
+    file_path = "./test_brickproof.toml"
     if os.path.isfile(file_path):
         os.remove(file_path)
 
