@@ -11,6 +11,7 @@ from brickproof.utils import (
     write_toml,
     get_runner_bytes,
     load_config,
+    parse_config_edits,
 )
 
 from brickproof.version import VERSION
@@ -207,3 +208,8 @@ def run(profile: str, file_path: str, verbose: bool):
     print("REMOVE", r.text)
 
     return success
+
+
+def edit(vars: list):
+    parse_config_edits(vars)
+    return 0

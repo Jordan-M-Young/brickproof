@@ -23,6 +23,15 @@ def main():
     # --- configure command ---
     subparsers.add_parser("configure", help="Configures your Databricks environment")
 
+    # --- edit command ---
+    edit_parser = subparsers.add_parser("edit-config", help="Edit toml config file.")
+    edit_parser.add_argument(
+        "-v",
+        "--vars",
+        nargs="+",
+        help="One or more config variables in the form key=value",
+    )
+
     # --- run command ---
     run_parser = subparsers.add_parser("run", help="Runs brickproof testing job")
     run_parser.add_argument("--profile", "-p", default="default", help="Profile name")
@@ -52,7 +61,9 @@ def main():
 
     elif args.command == "run":
         cli.run(profile=args.profile, file_path="./.bprc", verbose=args.verbose)
-
+    elif args.command == "edit-config":
+        print(args.vars)
+        cli.edit(args.vars)
     else:
         parser.print_help()
 
