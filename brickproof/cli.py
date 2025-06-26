@@ -192,11 +192,12 @@ def run(profile: str, file_path: str, verbose: bool):
             continue
 
         if result_state == "SUCCESS":
-            print(state)
-            result = True
+            success = True
         break
 
-    print("SUCCESS", result)
+    print("SUCCESS", success)
+    print(state)
+
 
     # delete job
     delete_payload = {"job_id": job_id}
