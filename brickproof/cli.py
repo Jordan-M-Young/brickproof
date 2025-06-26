@@ -198,13 +198,19 @@ def run(profile: str, file_path: str, verbose: bool):
     print("SUCCESS", success)
     print(state)
 
+    query_params = {
+        "run_id":run_id
+    }
+    r = handler.get_job_output()
+    print("OUTPUT", r.text)
+
+
 
     # delete job
     delete_payload = {"job_id": job_id}
 
-    if success:
-        r = handler.remove_job(delete_payload=delete_payload)
-        print(r.text)
+    r = handler.remove_job(delete_payload=delete_payload)
+    print(r.text)
 
     # delete repo
     r = handler.remove_git_folder(repo_id=repo_id)
