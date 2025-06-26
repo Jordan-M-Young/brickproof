@@ -201,7 +201,7 @@ def run(profile: str, file_path: str, verbose: bool):
     query_params = {
         "run_id":run_id
     }
-    r = handler.get_job_output()
+    r = handler.get_job_output(query_params=query_params)
     print("OUTPUT", r.text)
 
 
