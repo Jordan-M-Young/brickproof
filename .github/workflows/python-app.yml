@@ -30,7 +30,7 @@ jobs:
         python3 brickproof edit-config -v repo.branch=$GITHUB_HEAD_REF
         cat ./brickproof.toml
         touch .bprc
-        echo [profile] >> .bprc
+        echo [default] >> .bprc
         echo workspace=$WORKSPACE_URL >> .bprc
         echo token=$TOKEN >> .bprc
         cat .bprc
