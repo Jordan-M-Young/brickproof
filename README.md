@@ -35,6 +35,23 @@ brickproof configure
 This command will prompt you to enter your databricks workspace url, personal access token, and profile name. These
 will be written out to a `.bprc` file in your local directory. 
 
+## Edit Config
+
+To edit the values in your brickproof.toml using brickproof try the following:
+
+```sh
+brickproof edit-config -v section.field=new_value
+```
+
+where `section` is the toml file's section header value (`repo` or `job`) and field is the field name (`name`, `git_provider`, etc). Multiple values can be chained together like so:
+
+```sh
+brickproof edit-config -v repo.git_provider=gitHub job.dependencies='[requests,tomlkit,pydantic]'
+```
+
+This command can be helpful for editing your brickproof.toml file during CICD workflows.
+
+
 ## Run Brickproof
 
 To run a brickproof testing event, run:
@@ -119,6 +136,18 @@ There are three parts to each section of the `.nprc` file.
 - profile: the portion in in brackets (`[default]` or `[secondary]`) in the example.
 - `workspace`: the url of your databricks workspace where you'd like to run testing job
 - `token`: a valid PAT token generated in your databricks workspace
+
+
+## Support
+
+Currently Brickproof supports the following
+
+- Testing Frameworks:
+    - Pytest
+- CICD:
+    - Github Actions
+
+This is pretty low coverage for the possible combinations of testing/CICD frameworks available. If you want to see something added please open up an issue or check out the Contributing section and open a PR.
 
 
 ## Contributing
