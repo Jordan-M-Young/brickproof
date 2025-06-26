@@ -31,3 +31,20 @@ class JobConfig(BaseModel):
 class Config(BaseModel):
     repo: RepoConfig
     job: JobConfig
+
+    def write_to_toml(self):
+        toml_string = f"""[repo]
+name = "{self.repo.name}"
+workspace_path = "{self.repo.workspace_path}"
+git_provider = "{self.repo.git_provider.value}"
+git_repo = "{self.repo.git_repo}"
+branch = "{self.repo.branch}"
+
+[job]
+job_name = "{self.job.job_name}"
+task_key = "{self.job.task_key}"
+dependencies = [{",".join([f'"{dependecy}"' for dependecy in self.job.dependencies])}]
+runner = "{self.job.runner}"
+"""
+        with open("./brickproof.toml", "w") as tfile:
+            tfile.write(toml_string)

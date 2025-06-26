@@ -65,3 +65,23 @@ def get_runner_bytes(runner: str) -> str:
     base64_output = base64_encoded_data.decode("utf-8")
 
     return base64_output
+
+
+def parse_config_edits(vars: list):
+    config = load_config()
+    dumped_config = config.model_dump()
+
+    for var in vars:
+        key, val = var.split("=")
+        section, key = key.split(".")
+        if key == "dependencies":
+            val = val.replace("]", "").replace("[", "").split(",")
+
+        dumped_config[section][key] = val
+    x = Config(**dumped_config)
+    x.write_to_toml()
+
+
+def format_pytest_result(result_str: str):
+    exit, pytest_report = result_str.split("@@@")
+    return exit, pytest_report

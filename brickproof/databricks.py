@@ -42,6 +42,15 @@ class DatabricksHandler:
         )
         return response
 
+    def checkout_branch(
+        self, checkout_payload: dict, repo_id: str
+    ) -> requests.Response:
+        url = f"{self.workspace_url}/{c.CHECKOUT_ENDPOINT}/{repo_id}"
+        response = requests.patch(
+            url=url, data=json.dumps(checkout_payload), headers=self.headers
+        )
+        return response
+
     def remove_git_folder(self, repo_id: str) -> requests.Response:
         url = f"{self.workspace_url}/{c.CREATE_REPO_ENDPOINT}/{repo_id}"
         response = requests.delete(url=url, headers=self.headers)

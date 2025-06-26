@@ -11,6 +11,8 @@ from brickproof.utils import (
     write_toml,
     get_runner_bytes,
     load_config,
+    parse_config_edits,
+    format_pytest_result
 )
 
 from brickproof.version import VERSION
@@ -109,12 +111,17 @@ def run(profile: str, file_path: str, verbose: bool):
         git_payload = {
             "branch": project_config.repo.branch,
             "path": repo_path,
-            "provider": project_config.repo.git_provider,
+            "provider": project_config.repo.git_provider.value,
             "url": project_config.repo.git_repo,
         }
         r = handler.create_git_folder(git_payload=git_payload)
         git_data = r.json()
         repo_id = git_data["id"]
+
+    checkout_payload = {"branch":project_config.repo.branch}
+    query_params = {"repo_id":repo_id}
+    r = handler.checkout_branch(checkout_payload=checkout_payload,repo_id=repo_id)
+    print("CHECKOUT", r.text)
 
     # check for runner
     r = handler.list_files(workspace_path=repo_path)
@@ -191,19 +198,54 @@ def run(profile: str, file_path: str, verbose: bool):
             continue
 
         if result_state == "SUCCESS":
-            result = True
+            success = True
         break
 
-    print("SUCCESS", result)
+    print("SUCCESS", success)
+    print(state)
+    r = handler.check_job(query_params=query_params)
+    status = r.json()
+    print("FINAL",status)
+    tasks = status['tasks']
+    task = tasks[0]
+    task_id = task["run_id"]
 
-    # delete job
-    delete_payload = {"job_id": job_id}
 
-    r = handler.remove_job(delete_payload=delete_payload)
-    print(r.text)
+
+    query_params = {
+        "run_id":task_id
+    }
+    r = handler.get_job_output(query_params=query_params)
+    output = r.json()
+    print("OUPUT",output)
+
+
+    if output.get("notebook_output",{}).get("result"):
+        exit_message = output['notebook_output']['result']
+        exit_code, test_report = format_pytest_result(exit_message)
+        print(int(exit_code.split("=")[-1]))
+        print(test_report)
+        exit_code = int(exit_code.split("=")[-1])
+    else:
+        print("Notebook Output not found... check runner ")
+        exit_code = 1
+
+
+    if exit_code == 0:
+        # delete job
+        delete_payload = {"job_id": job_id}
+
+        r = handler.remove_job(delete_payload=delete_payload)
+        print(r.text)
+
 
     # delete repo
     r = handler.remove_git_folder(repo_id=repo_id)
     print("REMOVE", r.text)
 
-    return success
+    return exit_code
+
+
+def edit(vars: list):
+    parse_config_edits(vars)
+    return 0
