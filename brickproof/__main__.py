@@ -64,7 +64,7 @@ def main():
         if exit:
             return 0
         else:
-            return 1
+            raise Exception
 
     elif args.command == "edit-config":
         print(args.vars)
