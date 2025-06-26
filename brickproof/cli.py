@@ -223,35 +223,27 @@ def run(profile: str, file_path: str, verbose: bool):
     if output.get("notebook_output",{}).get("result"):
         exit_message = output['notebook_output']['result']
         exit_code, test_report = format_pytest_result(exit_message)
-        print(exit_code)
+        print(int(exit_code.split("=")[-1]))
         print(test_report)
-
+        exit_code = int(exit_code.split("=")[-1])
     else:
-        print("HMMMMMMM")
-
-    # print(output)
-    # if status:
-
-    # else:
-    #     print("DATA", output['error'])
-    #     print("DATA", output['error_trace'])
-
-    # print("EXIT",exit_code)
-    # print(test_report)
+        print("Notebook Output not found... check runner ")
+        exit_code = 1
 
 
+    if exit_code == 0:
+        # delete job
+        delete_payload = {"job_id": job_id}
 
-    # delete job
-    delete_payload = {"job_id": job_id}
+        r = handler.remove_job(delete_payload=delete_payload)
+        print(r.text)
 
-    r = handler.remove_job(delete_payload=delete_payload)
-    print(r.text)
 
     # delete repo
     r = handler.remove_git_folder(repo_id=repo_id)
     print("REMOVE", r.text)
 
-    return success
+    return exit_code
 
 
 def edit(vars: list):
