@@ -192,6 +192,7 @@ def run(profile: str, file_path: str, verbose: bool):
             continue
 
         if result_state == "SUCCESS":
+            print(state)
             result = True
         break
 
