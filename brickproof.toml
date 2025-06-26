@@ -8,5 +8,5 @@ branch = "main"
 [job]
 job_name = "Brickproof-Test"
 task_key = "Unittests"
-dependencies = ["requests","tomlkit"]
+dependencies = ["requests","tomlkit","pydantic"]
 runner = "default"
