@@ -36,4 +36,7 @@ jobs:
         cat .bprc
         set +e
         python3 brickproof run
-        echo "exitcode=$?"
+        if [ $? -eq 1 ]; then
+          echo "Command failed with exit code 1"
+          exit 1
+        fi
