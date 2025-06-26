@@ -65,7 +65,7 @@ def main():
             return 0
         else:
             return 1
-    
+
     elif args.command == "edit-config":
         print(args.vars)
         cli.edit(args.vars)

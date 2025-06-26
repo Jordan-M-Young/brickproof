@@ -218,9 +218,16 @@ def run(profile: str, file_path: str, verbose: bool):
     r = handler.get_job_output(query_params=query_params)
     print("OUTPUT", r.text)
     output = r.json()
-    print(output)
     exit_message = output['notebook_output']['result']
     exit_code, test_report = format_pytest_result(exit_message)
+
+    # print(output)
+    # if status:
+
+    # else:
+    #     print("DATA", output['error'])
+    #     print("DATA", output['error_trace'])
+
     print("EXIT",exit_code)
     print(test_report)
 

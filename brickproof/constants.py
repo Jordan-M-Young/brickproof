@@ -78,8 +78,6 @@ sys.stdout = captured_output
 retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"])
 output_string = captured_output.getvalue()
 sys.stdout = old_stdout
-# Fail the cell execution if we have any test failures.
-assert retcode == 0, 'The pytest invocation failed. See the log above for details.'
 
 # COMMAND ----------
 #Exits notebook run with a value we can use for determining success or failure.

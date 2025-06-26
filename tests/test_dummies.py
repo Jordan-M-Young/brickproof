@@ -1,9 +1,10 @@
 def add(i: int, j: int) -> int:
     return i + j
 
-def test_bad_test():
 
-    assert add(0,1) == 2
+def test_bad_test():
+    assert add(0, 1) == 2
+
 
 def test_units():
     real = add(1, 2)
