@@ -216,11 +216,18 @@ def run(profile: str, file_path: str, verbose: bool):
         "run_id":task_id
     }
     r = handler.get_job_output(query_params=query_params)
-    print("OUTPUT", r.text)
     output = r.json()
-    print(output)
-    # exit_message = output['notebook_output']['result']
-    # exit_code, test_report = format_pytest_result(exit_message)
+    print("OUPUT",output)
+
+
+    if output.get("notebook_output",{}).get("result"):
+        exit_message = output['notebook_output']['result']
+        exit_code, test_report = format_pytest_result(exit_message)
+        print(exit_code)
+        print(test_report)
+
+    else:
+        print("HMMMMMMM")
 
     # print(output)
     # if status:
