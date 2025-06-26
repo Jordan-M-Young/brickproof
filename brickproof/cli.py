@@ -200,12 +200,14 @@ def run(profile: str, file_path: str, verbose: bool):
     r = handler.check_job(query_params=query_params)
     status = r.json()
     print("FINAL",status)
-
+    tasks = status['tasks']
+    task = tasks[0]
+    task_id = task["run_id"]
 
 
 
     query_params = {
-        "run_id":run_id
+        "run_id":task_id
     }
     r = handler.get_job_output(query_params=query_params)
     print("OUTPUT", r.text)
