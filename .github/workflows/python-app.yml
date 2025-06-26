@@ -21,6 +21,10 @@ jobs:
         python3 -m pip install --upgrade pip
         python3 -m pip install -r requirements.txt
     - name: Run Brickproof
+      env: # Or as an environment variable
+        TOKEN: ${{ secrets.TOKEN }}
+        WORKSPACE_URL: ${{ secrets.WORKSPACE_URL }}
+
       run: |
         python3 brickproof version
         python3 brickproof edit-config -v repo.branch=$GITHUB_HEAD_REF
