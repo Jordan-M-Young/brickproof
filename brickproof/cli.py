@@ -120,7 +120,7 @@ def run(profile: str, file_path: str, verbose: bool):
 
     checkout_payload = {"branch":project_config.repo.branch}
     query_params = {"repo_id":repo_id}
-    r = handler.checkout_branch(checkout_payload=checkout_payload,query_params=query_params)
+    r = handler.checkout_branch(checkout_payload=checkout_payload,repo_id=repo_id)
     print("CHECKOUT", r.text)
 
     # check for runner
