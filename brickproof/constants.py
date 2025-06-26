@@ -11,7 +11,7 @@ GET_RUN_OUTPUT = "/api/2.2/jobs/runs/get-output"
 ONE_OFF_SUBMISSION = "/api/2.2/jobs/runs/submit"
 REMOVE_JOB_RUN_ENDPOINT = "/api/2.2/jobs/runs/delete"
 REMOVE_JOB_ENDPOINT = "/api/2.2/jobs/delete"
-
+CHECKOUT_ENDPOINT = "/api/2.0/repos/"
 
 # cli constants
 WORKSPACE_PROMPT = "Please enter your workspace url like: https://XXX-XXXXXXXX-XXXX.cloud.databricks.com: "

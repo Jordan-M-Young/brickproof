@@ -118,6 +118,11 @@ def run(profile: str, file_path: str, verbose: bool):
         git_data = r.json()
         repo_id = git_data["id"]
 
+    checkout_payload = {"branch":project_config.repo.branch}
+    query_params = {"repo_id":repo_id}
+    r = handler.checkout_branch(checkout_payload=checkout_payload,query_params=query_params)
+    print("CHECKOUT", r.text)
+
     # check for runner
     r = handler.list_files(workspace_path=repo_path)
     repo_objects = r.json()
