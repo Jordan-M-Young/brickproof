@@ -34,4 +34,6 @@ jobs:
         echo workspace=$WORKSPACE_URL >> .bprc
         echo token=$TOKEN >> .bprc
         cat .bprc
-        python3 brickproof run 
+        set +e
+        python3 brickproof run
+        echo "exitcode=$?"

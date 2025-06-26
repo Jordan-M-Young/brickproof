@@ -60,7 +60,12 @@ def main():
         cli.configure()
 
     elif args.command == "run":
-        cli.run(profile=args.profile, file_path="./.bprc", verbose=args.verbose)
+        exit = cli.run(profile=args.profile, file_path="./.bprc", verbose=args.verbose)
+        if exit:
+            return 0
+        else:
+            return 1
+    
     elif args.command == "edit-config":
         print(args.vars)
         cli.edit(args.vars)
