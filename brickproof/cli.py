@@ -110,7 +110,7 @@ def run(profile: str, file_path: str, verbose: bool):
         git_payload = {
             "branch": project_config.repo.branch,
             "path": repo_path,
-            "provider": project_config.repo.git_provider,
+            "provider": project_config.repo.git_provider.value,
             "url": project_config.repo.git_repo,
         }
         r = handler.create_git_folder(git_payload=git_payload)
