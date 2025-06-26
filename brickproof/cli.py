@@ -202,8 +202,9 @@ def run(profile: str, file_path: str, verbose: bool):
     # delete job
     delete_payload = {"job_id": job_id}
 
-    r = handler.remove_job(delete_payload=delete_payload)
-    print(r.text)
+    if success:
+        r = handler.remove_job(delete_payload=delete_payload)
+        print(r.text)
 
     # delete repo
     r = handler.remove_git_folder(repo_id=repo_id)
