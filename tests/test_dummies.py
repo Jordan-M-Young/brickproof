@@ -1,7 +1,7 @@
 def add(i: int, j: int) -> int:
     return i + j
 
-def bad_test():
+def test_bad_test():
 
     assert add(0,1) == 2
 
