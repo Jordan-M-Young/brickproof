@@ -197,6 +197,12 @@ def run(profile: str, file_path: str, verbose: bool):
 
     print("SUCCESS", success)
     print(state)
+    r = handler.check_job(query_params=query_params)
+    status = r.json()
+    print("FINAL",status)
+
+
+
 
     query_params = {
         "run_id":run_id
