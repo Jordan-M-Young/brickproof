@@ -1,0 +1,44 @@
+#example brickproof test cicd pipeline for github actions
+name: Brickproof Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install Dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
+        python3 -m pip install brickproof
+    - name: Run Brickproof
+      env: # add your workspace and token secrets to repo secrets in your repo settings
+        TOKEN: ${{ secrets.TOKEN }}
+        WORKSPACE_URL: ${{ secrets.WORKSPACE_URL }}
+
+      run: |
+        brickproof version
+        brickproof edit-config -v repo.branch=$GITHUB_HEAD_REF
+        cat ./brickproof.toml
+        touch .bprc
+        echo [default] >> .bprc
+        echo workspace=$WORKSPACE_URL >> .bprc
+        echo token=$TOKEN >> .bprc
+        cat .bprc
+        set +e
+        python3 brickproof run
+        if [ $? -eq 1 ]; then
+          echo "Command failed with exit code 1"
+          exit 1
+        fi

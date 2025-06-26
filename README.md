@@ -162,3 +162,21 @@ To setup, run the following:
 ```sh
 ./utility_scripts/dev_setup.sh
 ```
+
+
+
+# FAQ
+
+
+
+## How Does Brickproof work?
+
+Brickproof remotely runs git repo management and job orchestration in databricks. Using a custom runner, brickproof creates and runs a job that runs pytest on a copy of the repo/branch you specify in your brickproof.toml
+
+## Does Brickproof work?
+
+Yep! Brickproof uses itself (and Databricks Community version) to conduct the unit testing portion of our CICD pipelines.
+
+## Can I help?
+
+Definitely! Check out the contributing document or create an issue.
