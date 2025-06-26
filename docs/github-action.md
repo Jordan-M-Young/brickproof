@@ -23,7 +23,7 @@ The next section is more brickproof specific.
 
 ```yaml
 
-obs:
+jobs:
   test:
     runs-on: ubuntu-latest
     steps:
