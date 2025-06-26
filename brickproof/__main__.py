@@ -61,7 +61,10 @@ def main():
 
     elif args.command == "run":
         exit = cli.run(profile=args.profile, file_path="./.bprc", verbose=args.verbose)
-        return exit
+        if exit == 0:
+            return 0
+        else:
+            raise Exception
 
     elif args.command == "edit-config":
         print(args.vars)
