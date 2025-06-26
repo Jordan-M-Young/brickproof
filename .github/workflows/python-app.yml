@@ -25,3 +25,4 @@ jobs:
         python3 brickproof version
         python3 brickproof edit-config -v repo.branch=$GITHUB_HEAD_REF
         cat ./brickproof.toml
+        python3 brickproof run 
