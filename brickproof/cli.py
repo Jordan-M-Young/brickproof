@@ -12,6 +12,7 @@ from brickproof.utils import (
     get_runner_bytes,
     load_config,
     parse_config_edits,
+    format_pytest_result
 )
 
 from brickproof.version import VERSION
@@ -211,6 +212,11 @@ def run(profile: str, file_path: str, verbose: bool):
     }
     r = handler.get_job_output(query_params=query_params)
     print("OUTPUT", r.text)
+    output = r.json()
+    exit_message = output['notebook_output']['result']
+    exit_code, test_report = format_pytest_result(exit_message)
+    print("EXIT",exit_code)
+    print(test_report)
 
 
 

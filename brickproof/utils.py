@@ -80,3 +80,8 @@ def parse_config_edits(vars: list):
         dumped_config[section][key] = val
     x = Config(**dumped_config)
     x.write_to_toml()
+
+
+def format_pytest_result(result_str: str):
+    exit, pytest_report = result_str.split("@@@")
+    return exit, pytest_report

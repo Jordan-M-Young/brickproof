@@ -83,5 +83,5 @@ assert retcode == 0, 'The pytest invocation failed. See the log above for detail
 
 # COMMAND ----------
 #Exits notebook run with a value we can use for determining success or failure.
-dbutils.notebook.exit(f"@@@BrickproofExitCode={retcode}@@@{output_string}")
+dbutils.notebook.exit(f"BrickproofExitCode={retcode}@@@{output_string}")
 """
