@@ -160,7 +160,7 @@ See the Contributing doc for more details!
 To setup, run the following:
 
 ```sh
-./utility_scripts/dev_setup.sh
+./scripts/dev_setup.sh
 ```
 
 
