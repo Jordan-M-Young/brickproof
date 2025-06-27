@@ -69,7 +69,7 @@ def run(profile: str, file_path: str, verbose: bool):
         repo_id = orchestrator.clone_repo()
 
     # checkout branch
-    orchestrator.checkout_branch()
+    orchestrator.checkout_branch(repo_id)
 
     # check for runner
     runner_exists = orchestrator.check_for_runner()
