@@ -10,6 +10,7 @@ import logging
 import time
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
 
 
 class RunOrchestrator:
@@ -31,7 +32,7 @@ class RunOrchestrator:
 
     def get_repos(self) -> dict:
         # check for git repo in brickproof testing directory
-        print(self.repo_path)
+        logger.info(self.repo_path)
         r = self.handler.check_for_git_folder(self.repo_path)
         repos = r.json()
         return repos
@@ -41,7 +42,7 @@ class RunOrchestrator:
         git_repo_exists = False
         repo_id = ""
         for repo in repos.get("repos", []):
-            print(self.repo_path, f"/Workspace{repo['path']}")
+            logger.info(self.repo_path, f"/Workspace{repo['path']}")
 
             # if it does, grab it's id.
             if f"/Workspace{repo['path']}" == self.repo_path:
@@ -69,12 +70,12 @@ class RunOrchestrator:
         r = self.handler.checkout_branch(
             checkout_payload=checkout_payload, repo_id=repo_id
         )
-        print("CHECKOUT", r.text)
+        logger.info("CHECKOUT", r.text)
 
     def delete_repo(self, repo_id: str):
         # delete repo
         r = self.handler.remove_git_folder(repo_id=repo_id)
-        print("REMOVE", r.text)
+        logger.info("REMOVE", r.text)
 
     def create_job(self) -> str:
         runner_upload_path = f"{self.repo_path}/brickproof_runner.py"
@@ -140,8 +141,8 @@ class RunOrchestrator:
                 success = True
             break
 
-        print("SUCCESS", success)
-        print(state)
+        logger.info("SUCCESS", success)
+        logger.info(state)
 
         return state
 
@@ -152,7 +153,7 @@ class RunOrchestrator:
 
         r = self.handler.check_job(query_params=query_params)
         status = r.json()
-        print("FINAL", status)
+        logger.info("FINAL", status)
         tasks = status["tasks"]
         task = tasks[0]
         task_id = task["run_id"]
@@ -163,8 +164,7 @@ class RunOrchestrator:
         query_params = {"run_id": task_id}
         r = self.handler.get_job_output(query_params=query_params)
         output = r.json()
-        print("OUPUT", output)
-
+        logger.info("OUPUT", output)
         if output.get("notebook_output", {}).get("result"):
             exit_message = output["notebook_output"]["result"]
             exit_code, test_report = format_pytest_result(exit_message)
@@ -182,7 +182,7 @@ class RunOrchestrator:
         delete_payload = {"job_id": job_id}
 
         r = self.handler.remove_job(delete_payload=delete_payload)
-        print(r.text)
+        logger.info(r.text)
 
     def get_workspace_files(self) -> list:
         r = self.handler.list_files(
@@ -207,7 +207,7 @@ class RunOrchestrator:
         # create brickproof testing directory if it doesnt exist
         brick_proof_testing_dir = f"{self.db_config['workspace']}/{c.TESTING_DIRECTORY}"
         r = self.handler.make_directory(directory_path=brick_proof_testing_dir)
-        print(r.text)
+        logger.info(r.text)
 
     def check_for_runner(self) -> bool:
         # check for runner
@@ -232,4 +232,4 @@ class RunOrchestrator:
             "path": runner_upload_path,
         }
         r = self.handler.upload_file(upload_payload=upload_paylod)
-        print(r.text)
+        logger.info(r.text)
