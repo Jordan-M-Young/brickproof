@@ -70,5 +70,5 @@ x = {
     "error_trace": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)\nFile \u001b[0;32m<command-734922519609824>, line 17\u001b[0m\n\u001b[1;32m     15\u001b[0m sys\u001b[38;5;241m.\u001b[39mstdout \u001b[38;5;241m=\u001b[39m old_stdout\n\u001b[1;32m     16\u001b[0m \u001b[38;5;66;03m# Fail the cell execution if we have any test failures.\u001b[39;00m\n\u001b[0;32m---> 17\u001b[0m \u001b[38;5;28;01massert\u001b[39;00m retcode \u001b[38;5;241m==\u001b[39m \u001b[38;5;241m0\u001b[39m, \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mThe pytest invocation failed. See the log above for details.\u001b[39m\u001b[38;5;124m'\u001b[39m\n\n\u001b[0;31mAssertionError\u001b[0m: The pytest invocation failed. See the log above for details.",
     "notebook_output": {},
 }
-print("DATA", x['error'])
-print("DATA", x['error_trace'])
+print("DATA", x["error"])
+print("DATA", x["error_trace"])

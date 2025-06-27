@@ -167,8 +167,6 @@ To setup, run the following:
 
 # FAQ
 
-
-
 ## How Does Brickproof work?
 
 Brickproof remotely runs git repo management and job orchestration in databricks. Using a custom runner, brickproof creates and runs a job that runs pytest on a copy of the repo/branch you specify in your brickproof.toml
@@ -180,3 +178,12 @@ Yep! Brickproof uses itself (and Databricks Community version) to conduct the un
 ## Can I help?
 
 Definitely! Check out the contributing document or create an issue.
+
+## Is X supported by brickproof?
+
+Brickproof only supports pytest unit testing currently.
+
+## Is brickproof only a cli?
+
+No. While brickproof as a CLI is important and useful. There is an underlying library that makes the CLI functionality possible. Feel free to use it for your needs.
+
