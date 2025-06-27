@@ -20,8 +20,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def version():
-    print(f"brickproof-{VERSION}")
+def version() -> str:
+    return f"brickproof-{VERSION}"
 
 
 def configure():

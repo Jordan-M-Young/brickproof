@@ -51,7 +51,8 @@ def main():
 
     # --- Dispatch based on subcommand ---
     if args.command == "version":
-        cli.version()
+        version = cli.version()
+        print(version)
 
     elif args.command == "init":
         cli.init("./brickproof.toml")
