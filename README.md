@@ -1,6 +1,8 @@
 # Brickproof
 
-Testing suite for integrating Databricks tests into CI/CD workflows.
+Brickproof is a testing application and library for integrating unittests of Databricks code into CI/CD workflows. Brickproof is primarily used and manifests as a cli tool, but there is an python library that underpins the cli.
+
+Brickproof works by remote interaction with your databricks workspace. It remotely clones your repo into databricks, uploads a pytest runner file, and remotely creates and runs a testing job. The result of your testing job, including the familiar pytest report, is returned for your CI/CD pipeline to make use of.
 
 
 # Installation
@@ -173,7 +175,7 @@ Brickproof remotely runs git repo management and job orchestration in databricks
 
 ## Does Brickproof work?
 
-Yep! Brickproof uses itself (and Databricks Community version) to conduct the unit testing portion of our CICD pipelines.
+Currently, brickproof does work seamlessly with Databricks Community edition. Brickproof uses itself (and Databricks Community version) to conduct the unit testing portion of our CICD pipelines. However, we haven't tested on paid versions of databricks.
 
 ## Can I help?
 

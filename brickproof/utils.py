@@ -9,7 +9,7 @@ from brickproof.config import Config
 
 import tomlkit
 import base64
-
+import os
 
 def load_config() -> Config:
     toml_doc = read_toml("./brickproof.toml")
@@ -33,12 +33,29 @@ def read_toml(file_path: str = "./brickproof.toml") -> tomlkit.TOMLDocument:
 
 
 def write_profile(file_path: str, profile: str, token: str, workspace: str):
-    with open(file_path, "a") as bprc_file:
-        bprc_file.write(f"[{profile}]\n")
-        bprc_file.write(f"{WORKSPACE_PREFIX}{workspace}\n")
-        bprc_file.write(f"{TOKEN_PREFIX}{token}\n")
-        bprc_file.write("\n")
-
+    
+    profile_exists = False
+    if os.path.isfile(file_path):
+        with open(file_path, "r") as bprc_file:
+            data = bprc_file.readlines()
+            for idx, line in enumerate(data):
+                print(line)
+                if line == f"[{profile}]\n":
+                    profile_exists = True
+                    data[idx+1] = f"{WORKSPACE_PREFIX}{workspace}\n"
+                    data[idx+2] = f"{TOKEN_PREFIX}{token}\n"
+                    break
+    
+    
+    if not profile_exists:
+        with open(file_path, "a") as bprc_file:
+            bprc_file.write(f"[{profile}]\n")
+            bprc_file.write(f"{WORKSPACE_PREFIX}{workspace}\n")
+            bprc_file.write(f"{TOKEN_PREFIX}{token}\n")
+            bprc_file.write("\n")
+    else:
+        with open(file_path, "w") as bprc_file:
+            bprc_file.writelines(data)
 
 def get_profile(file_path: str, profile: str) -> dict:
     with open(file_path, "r") as bprc_file:
