@@ -175,7 +175,7 @@ Brickproof remotely runs git repo management and job orchestration in databricks
 
 ## Does Brickproof work?
 
-Yep! Brickproof uses itself (and Databricks Community version) to conduct the unit testing portion of our CICD pipelines.
+Currently, brickproof does work seamlessly with Databricks Community edition. Brickproof uses itself (and Databricks Community version) to conduct the unit testing portion of our CICD pipelines. However, we haven't tested on paid versions of databricks.
 
 ## Can I help?
 
