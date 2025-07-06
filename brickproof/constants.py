@@ -74,7 +74,7 @@ sys.dont_write_bytecode = True
 
 captured_output = StringIO()
 sys.stdout = captured_output
-retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{requirements}])
+retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{ignore}])
 output_string = captured_output.getvalue()
 sys.stdout = old_stdout
 
