@@ -91,6 +91,7 @@ workspace_path = "/Workspace/Users/jordan.m.young0@gmail.com"
 git_provider = "gitHub"
 git_repo = "https://github.com/Jordan-M-Young/brickproof.git"
 branch = "main"
+ignore = ["./tests/test_orchestrator.py","./tests/test_databricks.py"]
 
 [job]
 job_name = "Brickproof-Test"
@@ -109,7 +110,8 @@ testing job specifications respectively. Below we'll go into more detail on the 
 - `git_provider` : the place your repo lives. Valid values include: `gitHub`, `bitbucketCloud`, `gitLab`, `azureDevOpsServices`, `gitHubEnterprise`, `bitbucketServer`, `gitLabEnterpriseEdition` and `awsCodeCommit`
 - `git_repo` : url of the repo you're cloning / testing
 - `branch` : the branch you're testing
-
+- `ignore` : a list of files or directories you want brickproof to ignore when testing. 
+ 
 ### job
 
 - `job_name` : the name you wish your testing job to be associated with in databricks
