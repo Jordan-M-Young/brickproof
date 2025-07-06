@@ -221,9 +221,12 @@ class RunOrchestrator:
         return runner_exists
 
     def upload_runner(self):
+        ignore = self.db_config.repo.ignore
+        requirements = self.db_config.job.requirements
+
         runner_upload_path = f"{self.repo_path}/brickproof_runner.py"
 
-        content = get_runner_bytes(self.project_config.job.runner)
+        content = get_runner_bytes(self.project_config.job.runner, ignore, requirements)
         upload_paylod = {
             "content": content,
             "format": "SOURCE",

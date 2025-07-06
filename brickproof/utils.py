@@ -75,10 +75,11 @@ def insert_ignore_statement(runner_str: str, ignore: list[str]) -> str:
     if ignore:
         ignore_statement = [f'"--ignore={item}"' for item in ignore]
         ignore_statement = "," + ",".join(ignore_statement)
-    
-    runner_str = runner_str.replace("{ignore}",ignore_statement)
+
+    runner_str = runner_str.replace("{ignore}", ignore_statement)
 
     return runner_str
+
 
 def insert_dependencies(runner_str: str, requirements: list[str]) -> str:
     requirements_statement = ""
@@ -86,9 +87,10 @@ def insert_dependencies(runner_str: str, requirements: list[str]) -> str:
         requirements_statement = [item for item in requirements]
         requirements_statement = "!pip install " + " ".join(requirements_statement)
 
-    runner_str = runner_str.replace("{requirements}",requirements_statement)
+    runner_str = runner_str.replace("{requirements}", requirements_statement)
 
     return runner_str
+
 
 def get_runner_bytes(runner: str, ignore: list[str], requirements: list[str]) -> str:
     if runner == "default":

@@ -43,6 +43,4 @@ if ignore:
     ignore_statement = "," + ",".join(ignore_statement)
 
 
-
-
-print(RUNNER_DEF.replace("{ignore}",ignore_statement))
+print(RUNNER_DEF.replace("{ignore}", ignore_statement))

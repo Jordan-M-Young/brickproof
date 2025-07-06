@@ -5,7 +5,7 @@ from brickproof.utils import (
     write_toml,
     validate_toml,
     insert_ignore_statement,
-    insert_dependencies
+    insert_dependencies,
 )
 import os
 
@@ -51,8 +51,11 @@ def test_validate_toml():
     config = validate_toml(toml_doc)
     assert config.job.runner == "default"
 
+
 def test_insert_ignore_statement():
-    runner_str = """retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{ignore}])"""
+    runner_str = (
+        """retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{ignore}])"""
+    )
     ignore = ["./tests/test_dummy.py"]
     real = insert_ignore_statement(runner_str, ignore)
 
@@ -61,7 +64,7 @@ def test_insert_ignore_statement():
 
 
 def test_insert_dependencies():
-    requirements = ["requests","tomlkit"]
+    requirements = ["requests", "tomlkit"]
     runner_str = "{requirements}"
     real = insert_dependencies(runner_str, requirements)
     target = "!pip install requests tomlkit"
