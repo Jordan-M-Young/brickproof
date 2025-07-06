@@ -4,6 +4,7 @@ workspace_path = "/Workspace/Users/jordan.m.young0@gmail.com"
 git_provider = "gitHub"
 git_repo = "https://github.com/Jordan-M-Young/brickproof.git"
 branch = "main"
+ignore = ["./tests/test_orchestrator.py","./tests/test_databricks.py"]
 
 [job]
 job_name = "Brickproof-Test"

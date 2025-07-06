@@ -37,7 +37,7 @@ workspace_path = ""
 git_provider = "gitHub"
 git_repo = ""
 branch = ""
-
+ignore = []
 
 [job]
 job_name = ""
@@ -48,8 +48,7 @@ runner = "default"
 
 
 RUNNER_DEF = """# Databricks notebook source
-!pip install pytest
-!pip install tomlkit
+{requirements}
 # COMMAND ----------
 
 dbutils.library.restartPython()
@@ -75,7 +74,7 @@ sys.dont_write_bytecode = True
 
 captured_output = StringIO()
 sys.stdout = captured_output
-retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"])
+retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{requirements}])
 output_string = captured_output.getvalue()
 sys.stdout = old_stdout
 

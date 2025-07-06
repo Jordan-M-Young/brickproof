@@ -6,5 +6,3 @@ def test_version():
     target = f"brickproof-{VERSION}"
 
     assert target == version()
-
-
