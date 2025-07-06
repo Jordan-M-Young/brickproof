@@ -97,13 +97,13 @@ def get_runner_bytes(runner: str, ignore: list[str], requirements: list[str], re
     if runner == "default":
         runner_str = RUNNER_DEF
         runner_str = insert_ignore_statement(runner_str, ignore, repo_name)
-        runner_str = insert_dependencies(runner_str, requirements, repo_name)
+        runner_str = insert_dependencies(runner_str, requirements)
         runner_bytes = runner_str.encode()
 
     else:
         with open("./brickproof_runner.py", "r") as runner_file:
             runner_str = runner_file.read()
-            runner_str = insert_ignore_statement(runner_str, ignore)
+            runner_str = insert_ignore_statement(runner_str, ignore, repo_name)
             runner_str = insert_dependencies(runner_str, requirements)
 
             runner_bytes = runner_str.encode()
