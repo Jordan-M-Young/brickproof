@@ -85,7 +85,7 @@ def insert_dependencies(runner_str: str, requirements: list[str]) -> str:
     requirements_statement = ""
     if requirements:
         requirements_statement = [item for item in requirements]
-        requirements_statement = "!pip install " + " ".join(requirements_statement)
+        requirements_statement = "!pip install pytest " + " ".join(requirements_statement)
 
     runner_str = runner_str.replace("{requirements}", requirements_statement)
 
