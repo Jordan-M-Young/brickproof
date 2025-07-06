@@ -70,10 +70,11 @@ def get_profile(file_path: str, profile: str) -> dict:
     return {}
 
 
-def insert_ignore_statement(runner_str: str, ignore: list[str]) -> str:
+def insert_ignore_statement(runner_str: str, ignore: list[str], repo_name: str) -> str:
     ignore_statement = ""
     if ignore:
-        ignore_statement = [f'"--ignore={item}"' for item in ignore]
+
+        ignore_statement = [f'"--ignore={item.replace(".",repo_name,1)}"' for item in ignore]
         ignore_statement = "," + ",".join(ignore_statement)
 
     runner_str = runner_str.replace("{ignore}", ignore_statement)
@@ -92,11 +93,11 @@ def insert_dependencies(runner_str: str, requirements: list[str]) -> str:
     return runner_str
 
 
-def get_runner_bytes(runner: str, ignore: list[str], requirements: list[str]) -> str:
+def get_runner_bytes(runner: str, ignore: list[str], requirements: list[str], repo_name: str) -> str:
     if runner == "default":
         runner_str = RUNNER_DEF
-        runner_str = insert_ignore_statement(runner_str, ignore)
-        runner_str = insert_dependencies(runner_str, requirements)
+        runner_str = insert_ignore_statement(runner_str, ignore, repo_name)
+        runner_str = insert_dependencies(runner_str, requirements, repo_name)
         runner_bytes = runner_str.encode()
 
     else:
