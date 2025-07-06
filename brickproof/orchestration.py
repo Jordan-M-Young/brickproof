@@ -221,8 +221,8 @@ class RunOrchestrator:
         return runner_exists
 
     def upload_runner(self):
-        ignore = self.db_config.repo.ignore
-        requirements = self.db_config.job.requirements
+        ignore = self.project_config.repo.ignore
+        requirements = self.project_config.job.dependencies
 
         runner_upload_path = f"{self.repo_path}/brickproof_runner.py"
 
