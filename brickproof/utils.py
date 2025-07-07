@@ -73,8 +73,14 @@ def get_profile(file_path: str, profile: str) -> dict:
 def insert_ignore_statement(runner_str: str, ignore: list[str], repo_name: str) -> str:
     ignore_statement = ""
     if ignore:
+        statements = []
+        for item in ignore:
+            if item[0] == ".":
+                item = item.replace(".",repo_name,1)
+            
+            statements.append(item)
 
-        ignore_statement = [f'"--ignore={item.replace(".",repo_name,1)}"' for item in ignore]
+        ignore_statement = [f'"--ignore={item}"' for item in statements]
         ignore_statement = "," + ",".join(ignore_statement)
 
     runner_str = runner_str.replace("{ignore}", ignore_statement)
