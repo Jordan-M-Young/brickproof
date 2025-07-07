@@ -56,12 +56,15 @@ def test_insert_ignore_statement():
     runner_str = (
         """retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys"{ignore}])"""
     )
-    ignore = ["./tests/test_dummy.py"]
+    ignore = ["./tests/test_dummy.py", "dummy/tests/test_dummy2.py"]
     repo_name = "dummy"
     real = insert_ignore_statement(runner_str, ignore, repo_name)
 
-    target = """retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys","--ignore=dummy/tests/test_dummy.py"])"""
+    target = """retcode = pytest.main(["-p", "no:cacheprovider","--capture=sys","--ignore=dummy/tests/test_dummy.py","--ignore=dummy/tests/test_dummy2.py"])"""
     assert real == target
+
+
+
 
 
 def test_insert_dependencies():
