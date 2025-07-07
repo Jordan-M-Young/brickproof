@@ -19,6 +19,7 @@ class RepoConfig(BaseModel):
     git_provider: GitProviders
     git_repo: str
     branch: str
+    ignore: list[str]
 
 
 class JobConfig(BaseModel):
@@ -39,6 +40,7 @@ workspace_path = "{self.repo.workspace_path}"
 git_provider = "{self.repo.git_provider.value}"
 git_repo = "{self.repo.git_repo}"
 branch = "{self.repo.branch}"
+ignore = [{",".join([f'"{ignore}"' for ignore in self.repo.ignore])}]
 
 [job]
 job_name = "{self.job.job_name}"
