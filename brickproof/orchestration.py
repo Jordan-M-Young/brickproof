@@ -226,7 +226,9 @@ class RunOrchestrator:
         repo_name = self.project_config.repo.name
         runner_upload_path = f"{self.repo_path}/brickproof_runner.py"
 
-        content = get_runner_bytes(self.project_config.job.runner, ignore, requirements, repo_name)
+        content = get_runner_bytes(
+            self.project_config.job.runner, ignore, requirements, repo_name
+        )
         upload_paylod = {
             "content": content,
             "format": "SOURCE",
