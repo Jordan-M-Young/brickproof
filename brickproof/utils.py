@@ -76,8 +76,8 @@ def insert_ignore_statement(runner_str: str, ignore: list[str], repo_name: str) 
         statements = []
         for item in ignore:
             if item[0] == ".":
-                item = item.replace(".",repo_name,1)
-            
+                item = item.replace(".", repo_name, 1)
+
             statements.append(item)
 
         ignore_statement = [f'"--ignore={item}"' for item in statements]
@@ -92,14 +92,18 @@ def insert_dependencies(runner_str: str, requirements: list[str]) -> str:
     requirements_statement = ""
     if requirements:
         requirements_statement = [item for item in requirements]
-        requirements_statement = "!pip install pytest " + " ".join(requirements_statement)
+        requirements_statement = "!pip install pytest " + " ".join(
+            requirements_statement
+        )
 
     runner_str = runner_str.replace("{requirements}", requirements_statement)
 
     return runner_str
 
 
-def get_runner_bytes(runner: str, ignore: list[str], requirements: list[str], repo_name: str) -> str:
+def get_runner_bytes(
+    runner: str, ignore: list[str], requirements: list[str], repo_name: str
+) -> str:
     if runner == "default":
         runner_str = RUNNER_DEF
         runner_str = insert_ignore_statement(runner_str, ignore, repo_name)

@@ -64,9 +64,6 @@ def test_insert_ignore_statement():
     assert real == target
 
 
-
-
-
 def test_insert_dependencies():
     requirements = ["requests", "tomlkit"]
     runner_str = "{requirements}"
