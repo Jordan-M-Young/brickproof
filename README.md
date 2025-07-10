@@ -24,7 +24,7 @@ brickproof init
 This will create a new `brickproof.toml` file, which you will edit for your own usecase. Running the `init` command multiple times will not overwrite your `brickproof.toml` file.
 
 
-## Configre Databricks Connection
+## Configure Databricks Connection
 
 To configure connection credentials to your Databricks workspace, run:
 
